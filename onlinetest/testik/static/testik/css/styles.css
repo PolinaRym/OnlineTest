@@ -1,0 +1,467 @@
+html, body {
+    font-family: 'Arial';
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    color: #444;
+    background-color: #e6f5ff; /* Светлый голубой фон страницы */
+}
+
+a {
+    color: #007BFF; /* Основной голубой цвет для ссылок */
+    text-decoration: none;
+}
+a:hover {
+    color: #0056b3; /* Темнее при наведении */
+    text-decoration: underline;
+}
+
+img {
+    max-width: 600px;
+    height: auto;
+}
+
+img.img-article-left {
+    max-width: 300px;
+    height: auto;
+    float: left;
+    padding: 0 10px 10px 0;
+}
+
+img.img-article-left.thumb {
+    max-width: 150px;
+    height: auto;
+}
+
+p.link-read-post {
+    text-align: right;
+}
+p.link-read-post a {
+    padding: 10px;
+    min-width: 100px;
+    background: #007BFF; /* Голубая кнопка */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px; /* Закругленные углы */
+}
+
+div.article-panel {
+    background: #f6f9fc; /* Светлое голубое содержание */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #555;
+}
+div.article-panel p.first {
+    margin: 0;
+    float: left;
+}
+div.article-panel p.last {
+    margin: 0;
+    float: right;
+}
+
+ul.list-articles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.list-articles li {
+    border-bottom: 2px solid #a3c7ff; /* Бледно-голубая разделительная линия */
+}
+
+.table-page {
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+}
+.table-page tr {
+    height: 100%;
+}
+
+.clear {
+    clear: both;
+}
+
+.header {
+    background: #4081f7; /* Темный голубой для заголовка */
+    height: 60px;
+}
+
+.logo {
+    background: url('../images/logo.png') no-repeat center;
+    width: 59px; /* Установите фиксированную ширину */
+    height: 59px; /* Установите фиксированную высоту */
+    background-size: contain; /* Изображение будет масштабироваться, чтобы поместиться внутри элемента */
+}
+
+ul.mainmenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    color: #fff; /* Белый цвет текста в меню */
+    font-size: 20px;
+    overflow: hidden;
+}
+ul.mainmenu li {
+    float: left;
+    margin: 18px 40px 0 30px;
+}
+ul.mainmenu li.logo {
+    margin: 0;
+}
+ul.mainmenu li.last {
+    float: right;
+}
+
+ul.mainmenu li a {
+    color: #fff; /* Белый цвет ссылок в меню */
+    text-decoration: none;
+}
+ul.mainmenu li a:hover {
+    color: #a3c7ff; /* Светло-голубой при наведении */
+}
+
+.panelitems {
+    text-align: center;
+}
+
+ul.langitem {
+    list-style: none;
+    display: inline-block;
+    margin: 30px;
+    padding: 0;
+    max-width: 300px;
+}
+ul.langitem li {
+    margin: 10px 0 0 0;
+    width: 100%;
+}
+ul.langitem li.image {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+ul.langitem li.descr {
+    color: #777;
+    height: 170px;
+    overflow: hidden;
+}
+ul.langitem li a {
+    color: #007BFF; /* Цвет ссылок в языковом блоке */
+    text-decoration: none;
+    font-size: 20px;
+}
+ul.langitem li a:hover {
+    color: #4081f7; /* Темнее при наведении */
+}
+div.button {
+    background: #007BFF; /* Голубая кнопка */
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff; /* Цвет текста кнопки */
+}
+
+.table-content {
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+}
+
+.left-chapters {
+    margin: 0;
+    background: #f6f9fc; /* Светлое голубое содержание */
+    border-right: 2px solid #a3c7ff; /* Бледно-голубая граница */
+}
+.left-chapters ul {
+    width: 230px;
+    margin: 0;
+    padding: 20px 10px 10px 20px;
+    list-style: none;
+    font-size: 20px;
+}
+.left-chapters ul li {
+    margin: 30px 0 0 0;
+    color: #7a7a7a; /* Серый цвет текста */
+}
+.left-chapters ul li.selected {
+    color: #007BFF; /* Цвет выбранного элемента */
+}
+.left-chapters ul li a {
+    color: #444;
+    text-decoration: none;
+}
+.left-chapters ul li a:hover {
+    color: #CC0000; /* Цвет при наведении */
+}
+.left-chapters ul li.share {
+    margin: 60px 0 0 0;
+}
+.left-chapters ul li.share p {
+    margin: 30px 0 30px 0;
+}
+.left-chapters ul li.share a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 0 20px 0 0;
+}
+.left-chapters ul li.share a.share-yt {
+    width: 100%;
+    height: 30px;
+    background: url('../images/share_yt.png') no-repeat 0 0;
+}
+.left-chapters ul li.share a.share-yt:hover {
+    width: 100%;
+    height: 30px;
+    background: url('../images/share_yt.png') no-repeat 0 -30px;
+}
+
+ul.tags-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.tags-list li {
+    margin: 0;
+    padding: 0 0 10px;
+    display: inline-block;
+}
+
+ul.tags-list li a {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #007BFF; /* Граница голубого цвета */
+}
+
+.content {
+    padding: 40px 20px 20px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+ul.breadcrumbs {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 20px;
+    font-family: Sans-serif, Arial, Tahoma;
+}
+ul.breadcrumbs li {
+    display: inline-block;
+}
+ul.breadcrumbs li a {
+    color: #007BFF; /* Цвет хлебных крошек */
+    text-decoration: none;
+}
+ul.breadcrumbs li a:hover {
+    color: #4081f7; /* Темнее при наведении */
+}
+ul.breadcrumbs li:after {
+    padding: 0 10px 0 10px;
+    content: "\2192";
+}
+ul.breadcrumbs li.last:after {
+    content: "";
+}
+
+ul.control {
+    margin: 0;
+    padding: 60px 0 0 0;
+    list-style: none;
+    font-family: Sans-serif, Arial, Tahoma;
+    font-size: 18px;
+    width: 100%;
+}
+ul.control li {
+    float: left;
+    padding: 0 0 0 10px;
+}
+ul.control li.first:before {
+    content: "\2190";
+    padding: 0 10px 0 0;
+}
+ul.control li.last {
+    float: right;
+    padding: 0 40px 0 0;
+}
+ul.control li.last:after {
+    content: "\2192";
+    padding: 0 0 0 10px;
+}
+ul.control li a {
+    color: #007BFF; /* Цвет ссылок управления */
+    text-decoration: none;
+}
+ul.control li a:hover {
+    color: #4081f7; /* Темнее при наведении */
+}
+
+ul.content-table {
+    margin: 0;
+    padding: 60px 0 0 30px;
+    list-style: none;
+    font-family: Sans-serif, Arial, Tahoma;
+    font-size: 28px;
+}
+ul.content-table li {
+    margin: 0 0 40px 0;
+}
+ul.content-table li a {
+    color: #007BFF; /* Цвет ссылок в контентной таблице */
+    text-decoration: none;
+}
+ul.content-table li a:hover {
+    color: #4081f7; /* Темнее при наведении */
+}
+
+.content-text {
+    margin: 60px 0 0 30px;
+    color: #000;
+    font-size: 20px;
+    font-family: Yandex Sans Display Light;
+}
+.content-text h1 {
+    font-size: 32px;
+}
+
+ul.lang-list {
+    list-style: none;
+    margin: 0;
+    padding: 14px 0 0 0;
+    background: #4081f7; /* Темный голубой фон для языкового меню */
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #007BFF; /* Голубая граница */
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: Sans-serif, Arial, Tahoma;
+}
+ul.lang-list li {
+    display: inline-block;
+    margin-left: 40px;
+}
+ul.lang-list li.selected {
+    color: #fff; /* Белый для выбранного элемента */
+    border-bottom: 1px solid #fff; /* Белая граница */
+}
+ul.lang-list li a {
+    color: #eee; /* Светло-серый цвет в меню */
+    text-decoration: none;
+}
+ul.lang-list li a:hover {
+    color: #fdc073; /* Светло-золотистый при наведении */
+}
+
+.topic-subject .topic-line {
+    border-bottom: 1px solid #007BFF; /* Голубая линия темы */
+    margin-top: -16px;
+}
+
+.topic-subject .topic-text {
+    display: inline-block;
+    font-size: 28px;
+    color: #777;
+    padding: 0 10px 0 10px;
+    margin-left: 30px;
+    background: #fff;
+    font-family: Sans-serif, Arial, Tahoma;
+}
+
+.list-topic {
+    margin: 40px 0 60px 0;
+    font-family: Sans-serif, Arial, Tahoma;
+}
+.list-topic p {
+    margin: 0;
+    font-size: 28px;
+}
+.list-topic ol {
+    columns: 2;
+    -webkit-columns: 2;
+    column-gap: 40px;
+}
+.list-topic ol li {
+    display: list-item;
+    margin: 10px 10px 0 0px;
+    padding: 0 0 0 10px;
+}
+.list-topic ol li a {
+    color: #007BFF; /* Цвет ссылок в списке тем */
+    text-decoration: none;
+}
+.list-topic ol li a:hover {
+    color: #4081f7; /* Темнее при наведении */
+}
+
+.highlight {
+    max-width: 350px;
+    padding: 0 10px 0 10px;
+    margin: 0;
+    overflow: auto;
+    overflow-y: hidden;
+    background: #f0f0f0; /* Светлый фон для выделения */
+}
+.highlight p {
+    margin: 0;
+}
+.highlight .block {
+    width: 100%;
+    margin: 0;
+}
+.highlight .block p {
+    margin: 0;
+}
+
+.quote {
+    background: url('../images/blockquote.png') no-repeat 0 10px;
+    padding: 5px 5px 5px 70px;
+    font-family: Sans-serif, Arial, Tahoma;
+    font-style: italic;
+}
+
+#footer {
+    box-sizing: border-box;
+    background: #4081f7; /* Темный голубой для подвала */
+    padding: 5px;
+    color: #aaa;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Arial, Helvetica;
+    text-align: left;
+    overflow: hidden;
+}
+#footer a {
+    text-decoration: underline;
+    color: #aaa;
+}
+
+.form-input {
+    width: 300px;
+    font-size: 16px;
+}
+
+.form-label {
+    display: inline-block;
+    min-width: 150px;
+    vertical-align: top;
+}
+
+.form-error ul {
+    list-style: none;
+    padding: 0;
+    color: #CC0000;
+}
+
+.form-button {
+    min-width: 200px;
+    font-size: 16px;
+}
