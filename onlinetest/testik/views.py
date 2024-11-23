@@ -24,12 +24,12 @@ cats_db = [
 
 ]
 def index(request):#HttpRequest
-
     data = {
         'title': 'Главная страница',
             'menu': menu,
             'tests': data_db,
-            }
+             'cat_selected': 0,
+             }
     return render(request, 'testik/index.html', context=data )
 
 
@@ -63,7 +63,14 @@ def login(request):
     return HttpResponse("Авторизация")
 
 def show_category(request, cat_id):
-    return index(request)
+    data = {
+        'title': 'Главная страница',
+        'menu': menu,
+        'tests': data_db,
+        'cat_selected': cat_id,
+    }
+    return render(request, 'testik/index.html', context=data)
+
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
