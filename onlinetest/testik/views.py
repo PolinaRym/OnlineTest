@@ -26,11 +26,12 @@ cats_db = [
     {'id': 3, 'name': 'Тесты на оценку технических навыков'}
 
 ]
-def index(request):#HttpRequest
+def index(request):
+    tests = Test.objects.filter(is_published=1)
     data = {
         'title': 'Главная страница',
             'menu': menu,
-            'tests': data_db,
+            'tests': tests,
              'cat_selected': 0,
              }
     return render(request, 'testik/index.html', context=data )

@@ -34,16 +34,24 @@ img.img-article-left.thumb {
     height: auto;
 }
 
-t.link-read-test {
-    text-align: right;
+.link-read-test {
+    text-align: right; /* Выравнивание текста вправо */
 }
-t.link-read-test a {
-    padding: 10px;
-    min-width: 100px;
-    background: #007BFF; /* Голубая кнопка */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px; /* Закругленные углы */
+
+.link-read-test a {
+    display: inline-block; /* Убедитесь, что ссылка ведет себя как блок и принимает ширину */
+    padding: 10px; /* Отступы внутри кнопки */
+    min-width: 100px; /* Минимальная ширина кнопки */
+    background: #007BFF; /* Цвет фона кнопки */
+    color: #fff; /* Цвет текста кнопки */
+    text-decoration: none; /* Убираем подчеркивание текста */
+    border-radius: 5px; /* Скругленные углы */
+    text-align: center; /* Центрирование текста в кнопке */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.link-read-test a:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
 }
 
 div.article-panel {
