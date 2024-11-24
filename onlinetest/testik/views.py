@@ -39,8 +39,8 @@ def index(request):#HttpRequest
 def about(request):
     return render(request, 'testik/about.html', {'title': 'О сайте','menu': menu})
 
-def show_test(request, test_id):
-    test = get_object_or_404(Test, pk=test_id)
+def show_test(request, test_slug):
+    test = get_object_or_404(Test, slug=test_slug)
     data = {
         'title': test.title,
         'menu': menu,
