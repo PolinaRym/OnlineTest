@@ -10,8 +10,8 @@
                 <div>{{ t.content|linebreaks|truncatewords:50 }}</div>
                 {% endautoescape %}
                 <div class="clear"></div>
-                <p class="link-start-test">
-                    <a href="{% url 'start' t.id %}">Пройти тест</a>
+                <p class="link-read-test">
+                    <a href="{% t.get_absolute_url%}">Пройти тест</a>
                 </p>
             </li>
         {% endif %}

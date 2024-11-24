@@ -9,6 +9,6 @@ urlpatterns = [
     path('addpage/', views.addpage, name='add_test'),
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
-    path('start/<int:start_id>/', views.start_test, name = 'start'),
+    path('test/<int:test_id>/', views.show_test, name = 'test'),
     path('category/<int:cat_id>', views.show_category, name='category')
 ]

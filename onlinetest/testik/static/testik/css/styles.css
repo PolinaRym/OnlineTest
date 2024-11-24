@@ -34,10 +34,10 @@ img.img-article-left.thumb {
     height: auto;
 }
 
-p.link-read-post {
+t.link-read-test {
     text-align: right;
 }
-p.link-read-post a {
+t.link-read-test a {
     padding: 10px;
     min-width: 100px;
     background: #007BFF; /* Голубая кнопка */
