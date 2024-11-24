@@ -27,7 +27,7 @@ cats_db = [
 
 ]
 def index(request):
-    tests = Test.objects.filter(is_published=1)
+    tests = Test.published.all()
     data = {
         'title': 'Главная страница',
             'menu': menu,

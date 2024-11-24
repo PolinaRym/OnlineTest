@@ -61,11 +61,11 @@ div.article-panel {
     overflow: hidden;
     color: #555;
 }
-div.article-panel p.first {
+div.article-panel t.first {
     margin: 0;
     float: left;
 }
-div.article-panel p.last {
+div.article-panel t.last {
     margin: 0;
     float: right;
 }
