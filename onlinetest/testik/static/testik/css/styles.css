@@ -55,17 +55,17 @@ img.img-article-left.thumb {
 }
 
 div.article-panel {
-    background: #f6f9fc; /* Светлое голубое содержание */
-    padding: 10px;
+    background: #ddeeff ; /* Светлое голубое содержание */
+    padding: 5px 10px 5px 10px;
     box-sizing: border-box;
     overflow: hidden;
     color: #555;
 }
-div.article-panel t.first {
+div.article-panel .first {
     margin: 0;
     float: left;
 }
-div.article-panel t.last {
+div.article-panel .last {
     margin: 0;
     float: right;
 }
