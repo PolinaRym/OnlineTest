@@ -26,6 +26,8 @@ class Test(models.Model):
         return self.title
 
     class Meta:
+        verbose_name = "Онлайн тесты"
+        verbose_name_plural = "Онлайн тесты"
         ordering = ['-time_create']
         indexes = [
             models.Index(fields=['-time_create'])
