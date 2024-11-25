@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
-from .models import Test
+from .models import Test, Category
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Создать тест", 'url_name': 'add_test'},
@@ -20,12 +20,6 @@ data_db = [
     {'id': 3, 'title': 'ССРПО ДЗ', 'content': 'Шаблон стороитель', 'is_published': True},
 ]
 
-cats_db = [
-    {'id': 1, 'name': 'Тесты подтверждения квалификации'},
-    {'id': 2, 'name': 'Тесты повышения квалификации'},
-    {'id': 3, 'name': 'Тесты на оценку технических навыков'}
-
-]
 def index(request):
     tests = Test.published.all()
     data = {
@@ -60,12 +54,15 @@ def contact(request):
 def login(request):
     return HttpResponse("Авторизация")
 
-def show_category(request, cat_id):
+def show_category(request, cat_slug):
+    category = get_object_or_404(Category, slug=cat_slug)
+    tests = Test.published.filter(cat_id=category.pk)
+
     data = {
-        'title': 'Главная страница',
+        'title': f'Категория: {category.name}',
         'menu': menu,
-        'tests': data_db,
-        'cat_selected': cat_id,
+        'tests': tests,
+        'cat_selected': category.pk,
     }
     return render(request, 'testik/index.html', context=data)
 
