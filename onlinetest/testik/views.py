@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
-from .models import Test, Category
+from .models import Test, Category, TagTest
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Создать тест", 'url_name': 'add_test'},
@@ -69,3 +69,16 @@ def show_category(request, cat_slug):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+
+def show_tag_testlist(request, tag_slug):
+    tag =  get_object_or_404(TagTest, slug=tag_slug)
+    tests = tag.tags.filter(is_published=Test.Status.PUBLISHED)
+
+    data = {
+        'title': f"Тег: {tag.tag}",
+        'menu': menu,
+        'tests': tests,
+        'cat_selected': None,
+    }
+
+    return render(request, 'testik/index.html', context=data)

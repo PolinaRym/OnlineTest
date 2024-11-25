@@ -4,7 +4,7 @@
 <ul class="list-articles">
 	{% for t in tests %}
 	       <li><div class="article-panel">
-	<p class="first">Категория: {{t.cat}}</p>
+	<p class="first">Категория: {{t.cat.name}}</p>
 	<p class="last">Дата: {{t.time_update|date:"d-m-Y H:i:s"}}</p>
 	</div>
 			<h2>{{t.title}}</h2>
