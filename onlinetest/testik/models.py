@@ -12,13 +12,13 @@ class Test(models.Model):
         PUBLISHED = 1, 'Опубликовано'
 
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True, db_index=True)
-    content = models.TextField(blank=True)
-    time_create = models.DateTimeField(auto_now_add=True)
-    time_update = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(choices=Status.choices,default = Status.DRAFT)
-    cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='tests')
-    tags = models.ManyToManyField('TagTest', blank=True, related_name = 'tags')
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name = "Заголовок")
+    content = models.TextField(blank=True, verbose_name = "Тест")
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name = "Время создания")
+    time_update = models.DateTimeField(auto_now=True, verbose_name = "Время изменения")
+    is_published = models.BooleanField(choices=Status.choices,default = Status.DRAFT, verbose_name = "Статус")
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='tests', verbose_name = "Категории")
+    tags = models.ManyToManyField('TagTest', blank=True, related_name = 'tags', verbose_name = "Теги")
 
     objects = models.Manager()
     published = PublishedManager()
@@ -38,6 +38,10 @@ class Test(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категория"
 
     def __str__(self):
         return self.name
