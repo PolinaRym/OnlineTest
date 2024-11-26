@@ -1,3 +1,5 @@
+from tabnanny import verbose
+
 from django.db import models
 from django.urls import reverse
 
@@ -16,7 +18,8 @@ class Test(models.Model):
     content = models.TextField(blank=True, verbose_name = "Тест")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name = "Время создания")
     time_update = models.DateTimeField(auto_now=True, verbose_name = "Время изменения")
-    is_published = models.BooleanField(choices=Status.choices,default = Status.DRAFT, verbose_name = "Статус")
+    is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)),
+                                                     default = Status.DRAFT, verbose_name = "Статус")
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='tests', verbose_name = "Категории")
     tags = models.ManyToManyField('TagTest', blank=True, related_name = 'tags', verbose_name = "Теги")
 
@@ -36,7 +39,7 @@ class Test(models.Model):
         return reverse('test', kwargs={'test_slug': self.slug})
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, db_index=True)
+    name = models.CharField(max_length=100, db_index=True, verbose_name = "Категория")
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
 
     class Meta:
