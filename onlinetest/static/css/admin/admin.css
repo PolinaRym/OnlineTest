@@ -1,0 +1,11 @@
+#header, .module caption, #changelist-filter h2 {
+    background: #4081f7;
+}
+div.breadcrumbs {
+   background: #4081f7;
+}
+body {
+    background: #e6f5ff; /* Синий фон */
+    margin: 0; /* Убедитесь, что нет отступов */
+    height: 100vh; /* Занять всю высоту окна */
+}
