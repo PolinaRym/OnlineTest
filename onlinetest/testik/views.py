@@ -45,8 +45,8 @@ def show_test(request, test_slug):
     return render(request, 'testik/test.html', data)
 
 
-def addpage(request):
-    return HttpResponse("Создать тест")
+def addtest(request):
+    return render(request, 'testik/addtest.html', {'menu': menu, 'title': 'Добавление теста'})
 
 def contact(request):
     return HttpResponse("Обратная связь")
