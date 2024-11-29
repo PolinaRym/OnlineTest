@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
+from .forms import AddTestForm
 from .models import Test, Category, TagTest
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
@@ -46,7 +47,14 @@ def show_test(request, test_slug):
 
 
 def addtest(request):
-    return render(request, 'testik/addtest.html', {'menu': menu, 'title': 'Добавление теста'})
+    form = AddTestForm()
+    data = {
+        'menu': menu,
+        'title': 'Добавление теста',
+        'form': form
+
+    }
+    return render(request, 'testik/addtest.html', data)
 
 def contact(request):
     return HttpResponse("Обратная связь")
