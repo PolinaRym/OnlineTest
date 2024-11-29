@@ -2,7 +2,7 @@ from django import forms
 from .models import Category
 
 class AddTestForm(forms.Form):
-    title = forms.CharField(max_length = 255, label="Заголовок")
+    title = forms.CharField(max_length = 255, label="Заголовок", widget=forms.TextInput(attrs={'class': 'form-input'}))
     slug = forms.SlugField(max_length = 255, label="URL")
     content = forms.CharField(widget=forms.Textarea(), required=False, label="Контент")
     is_published = forms.BooleanField(required=False, initial = True, label="Статус")
