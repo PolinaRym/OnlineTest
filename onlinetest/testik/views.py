@@ -47,7 +47,13 @@ def show_test(request, test_slug):
 
 
 def addtest(request):
-    form = AddTestForm()
+    if request.method == 'POST':
+       form = AddTestForm(request.POST)
+       if form.is_valid():
+           print(form.cleaned_data)
+    else:
+        form = AddTestForm()
+
     data = {
         'menu': menu,
         'title': 'Добавление теста',
