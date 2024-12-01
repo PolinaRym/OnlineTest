@@ -10,6 +10,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
     path('test/<slug:test_slug>/', views.show_test, name = 'test'),
-    path('category/<slug:cat_slug>', views.show_category, name='category'),
-    path('tag/<slug:tag_slug>/', views.show_tag_testlist, name='tag')
+    path('category/<slug:cat_slug>', views.TestCategory.as_view(), name='category'),
+    path('tag/<slug:tag_slug>/', views.TagTestList.as_view(), name='tag')
 ]

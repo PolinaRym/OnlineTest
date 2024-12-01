@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 from .forms import AddTestForm, UploadFileForm
 from .models import Test, Category, TagTest, UploadFiles
@@ -15,25 +15,27 @@ menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Войти", 'url_name': 'login'},
 ]
 
-def index(request):
-    tests = Test.published.all().select_related('cat')
-    data = {
-        'title': 'Главная страница',
-            'menu': menu,
-            'tests': tests,
-             'cat_selected': 0,
-             }
-    return render(request, 'testik/index.html', context=data )
+# def index(request):
+#     tests = Test.published.all().select_related('cat')
+#     data = {
+#         'title': 'Главная страница',
+#             'menu': menu,
+#             'tests': tests,
+#              'cat_selected': 0,
+#              }
+#     return render(request, 'testik/index.html', context=data )
 
-class TestHome(TemplateView):
+class TestHome(ListView):
     template_name = 'testik/index.html'
+    context_object_name = 'tests'
     extra_context = {
         'title': 'Главная страница',
         'menu': menu,
-        'tests': Test.published.all().select_related('cat'),
         'cat_selected': 0,
     }
 
+    def get_queryset(self):
+        return Test.published.all().select_related('cat')
 
 def about(request):
     if request.method == 'POST':
@@ -80,22 +82,22 @@ class AddTest(View):
 
 
 
-def addtest(request):
-    if request.method == 'POST':
-       form = AddTestForm(request.POST, request.FILES)
-       if form.is_valid():
-           form.save()
-           return redirect('home')
-    else:
-        form = AddTestForm()
-
-    data = {
-        'menu': menu,
-        'title': 'Добавление теста',
-        'form': form
-
-    }
-    return render(request, 'testik/addtest.html', data)
+# def addtest(request):
+#     if request.method == 'POST':
+#        form = AddTestForm(request.POST, request.FILES)
+#        if form.is_valid():
+#            form.save()
+#            return redirect('home')
+#     else:
+#         form = AddTestForm()
+#
+#     data = {
+#         'menu': menu,
+#         'title': 'Добавление теста',
+#         'form': form
+#
+#     }
+#     return render(request, 'testik/addtest.html', data)
 
 def contact(request):
     return HttpResponse("Обратная связь")
@@ -115,19 +117,49 @@ def show_category(request, cat_slug):
     }
     return render(request, 'testik/index.html', context=data)
 
+class TestCategory(ListView):
+    template_name = 'testik/index.html'
+    context_object_name = 'tests'
+    allow_empty = False
+
+    def get_queryset(self):
+        return Test.published.filter(cat__slug=self.kwargs['cat_slug']).select_related('cat')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cat = context['tests'][0].cat
+        context['title'] = 'Категория - ' + cat.name
+        context['menu'] = menu
+        context['cat_selected'] = cat.pk
+        return context
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
 
-def show_tag_testlist(request, tag_slug):
-    tag =  get_object_or_404(TagTest, slug=tag_slug)
-    tests = tag.tags.filter(is_published=Test.Status.PUBLISHED)
+# def show_tag_testlist(request, tag_slug):
+#     tag =  get_object_or_404(TagTest, slug=tag_slug)
+#     tests = tag.tags.filter(is_published=Test.Status.PUBLISHED)
+#
+#     data = {
+#         'title': f"Тег: {tag.tag}",
+#         'menu': menu,
+#         'tests': tests,
+#         'cat_selected': None,
+#     }
+#
+#     return render(request, 'testik/index.html', context=data)
+class TagTestList(ListView):
+    template_name = 'testik/index.html'
+    context_object_name = 'tests'
+    allow_empty = False
 
-    data = {
-        'title': f"Тег: {tag.tag}",
-        'menu': menu,
-        'tests': tests,
-        'cat_selected': None,
-    }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tag = TagTest.objects.get(slug=self.kwargs['tag_slug'])
+        context['title'] = 'Тег: ' + tag.tag
+        context['menu'] = menu
+        context['cat_selected'] = None
+        return context
 
-    return render(request, 'testik/index.html', context=data)
+    def get_queryset(self):
+        return Test.published.filter(tags__slug=self.kwargs['tag_slug']).select_related('cat')
