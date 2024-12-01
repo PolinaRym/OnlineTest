@@ -4,21 +4,13 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
-from .forms import AddTestForm
+from .forms import AddTestForm, UploadFileForm
 from .models import Test, Category, TagTest
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Создать тест", 'url_name': 'add_test'},
         {'title': "Обратная связь", 'url_name': 'contact'},
         {'title': "Войти", 'url_name': 'login'},
-        ]
-
-data_db = [
-    {'id': 1, 'title': 'Схемотехника РК3', 'content': '''<h1>Асинхронные счетчики</h1>Рубежный контроль по схемотехнике — это тестирование, направленное на оценку знаний и навыков студентов в области проектирования и анализа электрических схем. 
-    В ходе контроля студенты проверяют усвоение ключевых понятий, таких как законы Ома и Кирхгофа, анализ электрических цепей, а также знакомство с элементами схем, такими как резисторы, конденсаторы и индуктивности''',
-     'is_published': True},
-    {'id': 2, 'title': 'ОС РК2', 'content': 'Linux', 'is_published': False},
-    {'id': 3, 'title': 'ССРПО ДЗ', 'content': 'Шаблон стороитель', 'is_published': True},
 ]
 
 def index(request):
@@ -31,9 +23,20 @@ def index(request):
              }
     return render(request, 'testik/index.html', context=data )
 
+def handle_uploaded_file(f):
+    with open(f"uploads/{f.name}", "wb+") as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 def about(request):
-    return render(request, 'testik/about.html', {'title': 'О сайте','menu': menu})
+    if request.method == 'POST':
+       form = UploadFileForm(request.POST, request.FILES)
+       if form.is_valid():
+           handle_uploaded_file(form.cleaned_data['file'])
+    else:
+       form = UploadFileForm()
+    return render(request, 'testik/about.html',
+                  {'title': 'О сайте','menu': menu, 'form': form})
 
 def show_test(request, test_slug):
     test = get_object_or_404(Test, slug=test_slug)
@@ -50,11 +53,8 @@ def addtest(request):
     if request.method == 'POST':
        form = AddTestForm(request.POST)
        if form.is_valid():
-           try:
-               Test.objects.create(**form.cleaned_data)
-               return redirect('home')
-           except:
-               form.add_error(None, "Ошибка добавления теста")
+           form.save()
+           return redirect('home')
     else:
         form = AddTestForm()
 
