@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 from django.views import View
+from django.views.generic import TemplateView
 
 from .forms import AddTestForm, UploadFileForm
 from .models import Test, Category, TagTest, UploadFiles
@@ -15,7 +16,7 @@ menu = [{'title': "О сайте", 'url_name': 'about'},
 ]
 
 def index(request):
-    tests = Test.published.all()
+    tests = Test.published.all().select_related('cat')
     data = {
         'title': 'Главная страница',
             'menu': menu,
@@ -23,6 +24,15 @@ def index(request):
              'cat_selected': 0,
              }
     return render(request, 'testik/index.html', context=data )
+
+class TestHome(TemplateView):
+    template_name = 'testik/index.html'
+    extra_context = {
+        'title': 'Главная страница',
+        'menu': menu,
+        'tests': Test.published.all().select_related('cat'),
+        'cat_selected': 0,
+    }
 
 
 def about(request):
