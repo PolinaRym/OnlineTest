@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
+from django.views import View
 
 from .forms import AddTestForm, UploadFileForm
 from .models import Test, Category, TagTest, UploadFiles
@@ -44,6 +45,29 @@ def show_test(request, test_slug):
         'cat_selected': 1,
     }
     return render(request, 'testik/test.html', data)
+
+class AddTest(View):
+    def get(self, request):
+        form = AddTestForm
+        data = {
+            'menu': menu,
+            'title': 'Создание теста',
+            'form': form
+        }
+        return render(request, 'testik/test.html', data)
+
+    def post(self, request):
+        form = AddTestForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        data = {
+            'menu': menu,
+            'title': 'Создание теста',
+            'form': form
+        }
+        return render(request, 'testik/test.html', data)
+
 
 
 def addtest(request):
