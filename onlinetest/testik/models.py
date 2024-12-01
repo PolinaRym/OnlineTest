@@ -39,7 +39,8 @@ class Test(models.Model):
                                MinLengthValidator(5, message="Минимум 5 символов"),
                                MaxLengthValidator(100, message="Максимум 100 символов"),
                            ])
-
+    photo = models.ImageField(upload_to="photos/%Y/%m/%d/", default=None,
+                              blank=True, null=True, verbose_name="Фото")
     content = models.TextField(blank=True, verbose_name = "Тест")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name = "Время создания")
     time_update = models.DateTimeField(auto_now=True, verbose_name = "Время изменения")
@@ -90,3 +91,6 @@ class TagTest(models.Model):
 
     def get_absolute_url(self):
         return reverse('tag', kwargs={'tag_slug': self.slug})
+
+class UploadFiles(models.Model):
+    file = models.FileField(upload_to='uploads_model')

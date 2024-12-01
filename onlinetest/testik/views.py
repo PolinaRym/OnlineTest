@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
 from .forms import AddTestForm, UploadFileForm
-from .models import Test, Category, TagTest
+from .models import Test, Category, TagTest, UploadFiles
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Создать тест", 'url_name': 'add_test'},
@@ -23,16 +23,13 @@ def index(request):
              }
     return render(request, 'testik/index.html', context=data )
 
-def handle_uploaded_file(f):
-    with open(f"uploads/{f.name}", "wb+") as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
 
 def about(request):
     if request.method == 'POST':
        form = UploadFileForm(request.POST, request.FILES)
        if form.is_valid():
-           handle_uploaded_file(form.cleaned_data['file'])
+           fp = UploadFiles(file=form.cleaned_data['file'])
+           fp.save()
     else:
        form = UploadFileForm()
     return render(request, 'testik/about.html',
@@ -51,7 +48,7 @@ def show_test(request, test_slug):
 
 def addtest(request):
     if request.method == 'POST':
-       form = AddTestForm(request.POST)
+       form = AddTestForm(request.POST, request.FILES)
        if form.is_valid():
            form.save()
            return redirect('home')

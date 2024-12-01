@@ -7,6 +7,9 @@
 	<p class="first">Категория: {{t.cat.name}}</p>
 	<p class="last">Дата: {{t.time_update|date:"d-m-Y H:i:s"}}</p>
 	</div>
+{% if t.photo %}
+			   <p><img class="img-article-left thumb" src="{{t.photo.url}}"></p>
+{% endif %}
 			<h2>{{t.title}}</h2>
     {% autoescape off %}
 	{{t.content|linebreaks|truncatewords:40}}
