@@ -1,5 +1,6 @@
 from tabnanny import verbose
 
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -8,26 +9,6 @@ from django.urls import reverse
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(is_published=Test.Status.PUBLISHED)
-def translit_to_eng(s: str) -> str:
-     d = {
-        'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g',
-        'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
-        'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k',
-        'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
-        'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
-        'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts',
-        'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '',
-        'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya',
-        'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G',
-        'Д': 'D', 'Е': 'E', 'Ё': 'Yo', 'Ж': 'Zh',
-        'З': 'Z', 'И': 'I', 'Й': 'Y', 'К': 'K',
-        'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O',
-        'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T',
-        'У': 'U', 'Ф': 'F', 'Х': 'Kh', 'Ц': 'Ts',
-        'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Shch', 'Ъ': '',
-        'Ы': 'Y', 'Ь': '', 'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya',
-    }
-     return "".join(map(lambda x: d[x] if d.get(x, False) else x, s.lower()))
 
 class Test(models.Model):
     class Status (models.IntegerChoices):
@@ -48,6 +29,7 @@ class Test(models.Model):
                                                      default = Status.DRAFT, verbose_name = "Статус")
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='tests', verbose_name = "Категории")
     tags = models.ManyToManyField('TagTest', blank=True, related_name = 'tags', verbose_name = "Теги")
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name = 'tests', null=True, default=None)
 
     objects = models.Manager()
     published = PublishedManager()
