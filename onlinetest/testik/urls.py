@@ -9,7 +9,9 @@ urlpatterns = [
     path('addtest/', views.AddTest.as_view(), name='add_test'),
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
-    path('test/<slug:test_slug>/', views.ShowPost.as_view(), name = 'test'),
+    path('test/<slug:test_slug>/', views.ShowTest.as_view(), name = 'test'),
     path('category/<slug:cat_slug>', views.TestCategory.as_view(), name='category'),
-    path('tag/<slug:tag_slug>/', views.TagTestList.as_view(), name='tag')
+    path('tag/<slug:tag_slug>/', views.TagTestList.as_view(), name='tag'),
+    path('edit/<slug:slug>/', views.UpdateTest.as_view(), name='edit_test'),
+
 ]
