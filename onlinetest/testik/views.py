@@ -22,7 +22,6 @@ class TestHome(DataMixin, ListView):
     context_object_name = 'tests'
     title_page = 'Главная страница'
     cat_selected = 0
-    paginate_by = 5
 
     def get_queryset(self):
         return Test.published.all().select_related('cat')

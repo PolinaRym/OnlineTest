@@ -1,13 +1,13 @@
 from django import template
 import testik.views as views
 from testik.models import Category, TagTest
-
+from testik.utils import menu
 
 register = template.Library()
 
 @register.simple_tag()
 def get_menu():
-    return views.menu
+    return menu
 
 @register.inclusion_tag('testik/list_categories.html')
 def show_categories(cat_selected=0):
