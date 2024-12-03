@@ -21,7 +21,6 @@ img {
     max-width: 600px;
     height: auto;
 }
-
 img.img-article-left {
     max-width: 300px;
     height: auto;
@@ -33,7 +32,13 @@ img.img-article-left.thumb {
     max-width: 150px;
     height: auto;
 }
-
+.profile-image {
+        max-width: 150px; /* Максимальная ширина изображения */
+        max-height: 150px; /* Максимальная высота изображения */
+        width: auto; /* Автоматическая ширина */
+        height: auto; /* Автоматическая высота */
+        border-radius: 50%; /* Скругление углов (если нужно) */
+    }
 .link-read-test {
     text-align: right; /* Выравнивание текста вправо */
 }
