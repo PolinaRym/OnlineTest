@@ -86,8 +86,12 @@ WSGI_APPLICATION = 'onlinetest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  'onlinetest',
+        'USER':  'postgres',
+        'PASSWORD':  'Marti123!',
+        'HOST':  'localhost',
+        'PORT':  5432,
     }
 }
 
