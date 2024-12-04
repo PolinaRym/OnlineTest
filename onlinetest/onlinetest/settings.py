@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'onlinetest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'onlinetest',
+        'NAME':  'onlinetestPolina',
         'USER':  'postgres',
         'PASSWORD':  'Marti123!',
         'HOST':  'localhost',

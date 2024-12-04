@@ -1,9 +1,6 @@
-from tabnanny import verbose
-
 from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.urls import reverse
 
 class PublishedManager(models.Manager):
@@ -76,3 +73,17 @@ class TagTest(models.Model):
 
 class UploadFiles(models.Model):
     file = models.FileField(upload_to='uploads_model')
+
+class Question(models.Model):
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name='questions', verbose_name='Тест')
+    text = models.CharField(max_length=255, verbose_name='Вопрос')
+    correct_answer = models.CharField(max_length=255, verbose_name='Правильный ответ')
+    order = models.PositiveIntegerField(default=0, verbose_name='Порядок')
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'
+
+    def __str__(self):
+        return self.text

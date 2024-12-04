@@ -1,9 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator, MaxLengthValidator
-from django.utils.deconstruct import deconstructible
+from django.forms import inlineformset_factory
+from .models import Category, Test, Question
 
-from .models import Category, Test
 
 
 class AddTestForm(forms.ModelForm):
@@ -24,3 +23,15 @@ class AddTestForm(forms.ModelForm):
 
 class UploadFileForm(forms.Form):
     file = forms.FileField(label = "Файл")
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['text', 'correct_answer', 'order']
+        widgets = {
+            'text': forms.TextInput(attrs={'class': 'form-input'}),
+            'correct_answer': forms.TextInput(attrs={'class': 'form-input'}),
+            'order': forms.NumberInput(attrs={'class': 'form-input'}),
+        }
+
+QuestionFormSet = inlineformset_factory(Test, Question, form=QuestionForm, extra=1, can_delete=True)

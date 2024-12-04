@@ -1,3 +1,5 @@
+<!-- addtest.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -6,9 +8,70 @@
     {% csrf_token %}
     <div class="form-error">{{ form.non_field_errors }}</div>
     {% for f in form %}
-    <p><Label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</Label>{{ f }}</p>
-    <div class="form-error">{{ form.title.errors }}</div>
+    <p>
+        <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+        {{ f }}
+    </p>
+    <div class="form-error">{{ f.errors }}</div>
     {% endfor %}
+
+    <h2>Вопросы</h2>
+    {{ formset.management_form }}
+    <div id="questions">
+        {% for form in formset %}
+            <div class="question-form">
+                <p>
+                    <label for="{{ form.id_for_label }}">Вопрос {{ forloop.counter }}</label>
+                    {{ form.text }}
+                </p>
+                <p>
+                    <label for="{{ form.id_for_label }}">Правильный ответ</label>
+                    {{ form.correct_answer }}
+                </p>
+                <p>
+                    <label for="{{ form.id_for_label }}">Порядок</label>
+                    {{ form.order }}
+                </p>
+                {% if form.instance.pk %}
+                    <p>{{ form.DELETE }} Удалить вопрос</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="button" id="add-question">Добавить вопрос</button>
     <p><button type="submit">Отправить</button></p>
 </form>
+
+<!-- Шаблон для пустой формы вопроса -->
+<div id="empty-form" style="display:none;">
+    <div class="question-form">
+        <p>
+            <label for="id_question_set-__prefix__-text">Вопрос</label>
+            {{ formset.empty_form.text }}
+        </p>
+        <p>
+            <label for="id_question_set-__prefix__-correct_answer">Правильный ответ</label>
+            {{ formset.empty_form.correct_answer }}
+        </p>
+        <p>
+            <label for="id_question_set-__prefix__-order">Порядок</label>
+            {{ formset.empty_form.order }}
+        </p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('add-question').addEventListener('click', function(e){
+        e.preventDefault();
+        var formsetDiv = document.getElementById('questions');
+        var totalForms = document.getElementById('id_question_set-TOTAL_FORMS');
+        var currentFormCount = parseInt(totalForms.value);
+        var emptyFormHtml = document.getElementById('empty-form').innerHTML.replace(/__prefix__/g, currentFormCount);
+        var div = document.createElement('div');
+        div.classList.add('question-form');
+        div.innerHTML = emptyFormHtml;
+        formsetDiv.appendChild(div);
+        totalForms.value = currentFormCount + 1;
+    });
+</script>
 {% endblock %}
