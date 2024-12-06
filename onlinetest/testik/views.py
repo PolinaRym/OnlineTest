@@ -29,13 +29,9 @@ class TestHome(DataMixin, ListView):
         return Test.published.all().select_related('cat')
 @login_required
 def about(request):
-    contact_list = Test.published.all()
-    paginator = Paginator(contact_list, 5)
-
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    test_list = Test.published.all()  # Получаем все тесты без пагинации
     return render(request, 'testik/about.html',
-                  {'title': 'О сайте', 'page_obj': page_obj})
+                  {'title': 'О сайте', 'page_obj': test_list})  # Передаем список всех тестов
 
 class ShowTest(DataMixin, DetailView):
     template_name = 'testik/test.html'
