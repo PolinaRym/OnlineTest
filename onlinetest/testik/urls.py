@@ -13,5 +13,6 @@ urlpatterns = [
     path('category/<slug:cat_slug>', views.TestCategory.as_view(), name='category'),
     path('tag/<slug:tag_slug>/', views.TagTestList.as_view(), name='tag'),
     path('edit/<slug:slug>/', views.UpdateTest.as_view(), name='edit_test'),
+    path('test/<slug:test_slug>/submit/', views.SubmitAnswers.as_view(), name='submit_answers'),
 
 ]

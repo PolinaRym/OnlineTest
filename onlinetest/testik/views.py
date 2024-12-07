@@ -1,3 +1,4 @@
+import self
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
@@ -8,9 +9,9 @@ from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, FormView, CreateView, UpdateView
-
+from django.views import View
 from .forms import AddTestForm, UploadFileForm, ContactForm
-from .models import Test, Category, TagTest, UploadFiles
+from .models import Test, Category, TagTest, UploadFiles, Question
 from .utils import DataMixin
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
@@ -45,15 +46,28 @@ class ShowTest(DataMixin, DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(Test.published, slug=self.kwargs[self.slug_url_kwarg])
 
+
 class AddTest(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddTestForm
     template_name = 'testik/addtest.html'
     title_page = 'Создание теста'
 
     def form_valid(self, form):
-        a = form.save(commit=False)
-        a.author = self.request.user
+        test_instance = form.save(commit=False)
+        test_instance.author = self.request.user
+        test_instance.save()
+
+        # Сохраняем вопросы и правильные ответы
+        questions = self.request.POST.getlist('question[]')
+        answers = self.request.POST.getlist('answer[]')
+
+        for question, answer in zip(questions, answers):
+            Question.objects.create(test=test_instance, question_text=question, correct_answer=answer)
+
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('home')
 
 class UpdateTest(DataMixin, UpdateView):
     model = Test
@@ -106,3 +120,14 @@ class TagTestList(DataMixin, ListView):
 
     def get_queryset(self):
         return Test.published.filter(tags__slug=self.kwargs['tag_slug']).select_related('cat')
+
+class SubmitAnswers(View):
+    def post(self, request, test_slug):
+        test = get_object_or_404(Test, slug=test_slug)
+        user_answers = request.POST.getlist('answers[]')
+        correct_answers = [question.correct_answer for question in test.questions.all()]
+
+        score = sum(1 for user_ans, correct_ans in zip(user_answers, correct_answers) if user_ans == correct_ans)
+        total_questions = len(correct_answers)
+
+        return render(request, 'testik/results.html', {'score': score, 'total': total_questions})

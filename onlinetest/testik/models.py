@@ -76,3 +76,15 @@ class TagTest(models.Model):
 
 class UploadFiles(models.Model):
     file = models.FileField(upload_to='uploads_model')
+
+class Question(models.Model):
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name='questions')
+    question_text = models.CharField(max_length=255)
+    correct_answer = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.question_text
+
+    class Meta:
+        verbose_name = "Вопрос"
+        verbose_name_plural = "Вопросы"

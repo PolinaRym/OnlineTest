@@ -6,7 +6,7 @@
 <ul class="tags-list">
     <li>Теги:</li>
     {% for t in tags %}
-    <li><a href="{{t.get_absolute_url}}">{{t.tag}}</a></li>
+    <li><a href="{{ t.get_absolute_url }}">{{ t.tag }}</a></li>
     {% endfor %}
 </ul>
 {% endif %}
@@ -14,11 +14,22 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{test.title}}</h1>
+<h1>{{ test.title }}</h1>
 
 {% if test.photo %}
-<p><img class="img-article-left" src="{{test.photo.url}}"></p>
+<p><img class="img-article-left" src="{{ test.photo.url }}"></p>
 {% endif %}
 
-{{test.content|linebreaks}}
+{{ test.content|linebreaks }}
+
+<form id="answers-form" action="{% url 'submit_answers' test.slug %}" method="post">
+    {% csrf_token %}
+    {% for question in test.questions.all %}
+    <div>
+        <label>{{ question.question_text }}</label>
+        <input type="text" name="answers[]" class="form-input" placeholder="Ваш ответ" required>
+    </div>
+    {% endfor %}
+    <p><button type="submit">Получить результаты теста</button></p>
+</form>
 {% endblock %}

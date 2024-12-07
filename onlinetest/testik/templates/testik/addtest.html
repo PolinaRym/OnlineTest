@@ -5,10 +5,49 @@
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-error">{{ form.non_field_errors }}</div>
-    {% for f in form %}
-    <p><Label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</Label>{{ f }}</p>
+
     <div class="form-error">{{ form.title.errors }}</div>
+
+    {% for f in form %}
+        <p>
+            <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+            {{ f }}
+            <div class="form-error">{{ f.errors }}</div>
+        </p>
     {% endfor %}
+
+    <div id="questions-container">
+        <div class="question-block">
+            <label class="form-label" for="question_1">Вопрос</label>
+            <input type="text" name="question[]" id="question_1" class="form-input" placeholder="Введите вопрос" required>
+            <label class="form-label" for="answer_1">Правильный ответ</label>
+            <input type="text" name="answer[]" id="answer_1" class="form-input" placeholder="Введите правильный ответ" required>
+        </div>
+    </div>
+
+    <button type="button" id="add-question-button">Добавить вопрос</button>
+
     <p><button type="submit">Отправить</button></p>
 </form>
+
+<script>
+    const addQuestionButton = document.getElementById('add-question-button');
+    const questionsContainer = document.getElementById('questions-container');
+    let questionCount = 1;
+
+    addQuestionButton.addEventListener('click', function () {
+        questionCount++;
+        const questionBlock = document.createElement('div');
+        questionBlock.classList.add('question-block');
+
+        questionBlock.innerHTML = `
+            <label class="form-label" for="question_${questionCount}">Вопрос</label>
+            <input type="text" name="question[]" id="question_${questionCount}" class="form-input" placeholder="Введите вопрос" required>
+            <label class="form-label" for="answer_${questionCount}">Правильный ответ</label>
+            <input type="text" name="answer[]" id="answer_${questionCount}" class="form-input" placeholder="Введите правильный ответ" required>
+        `;
+
+        questionsContainer.appendChild(questionBlock);
+    });
+</script>
 {% endblock %}
