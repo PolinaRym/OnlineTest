@@ -519,3 +519,34 @@ ul.lang-list li a:hover {
 .list-pages .page-num-selected:hover {
 	box-shadow: none;
 }
+.button {
+    display: inline-block; /* Отображение в строку */
+    background-color: #007BFF; /* Основной цвет для кнопки */
+    color: #ffffff; /* Цвет текста */
+    padding: 10px 20px; /* Внутренние отступы */
+    border: none; /* Убираем стандартные границы */
+    border-radius: 5px; /* Скругление углов кнопки */
+    font-size: 16px; /* Размер шрифта */
+    text-align: center; /* Центрируем текст */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: background-color 0.3s, transform 0.3s; /* Плавный переход для цвета фона и масштабирования */
+    cursor: pointer; /* Указатель при наведении */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+    transform: scale(1.05); /* Немного увеличиваем кнопку при наведении */
+}
+
+.button:active {
+    transform: scale(0.95); /* Уменьшаем кнопку при нажатии */
+}
+
+/* Специальные варианты кнопок */
+.button-secondary {
+    background-color: #6c757d; /* Серый цвет для второстепенных кнопок */
+}
+
+.button-secondary:hover {
+    background-color: #5a6268; /* Темнее при наведении */
+}
