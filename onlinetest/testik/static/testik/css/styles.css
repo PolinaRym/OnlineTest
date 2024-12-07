@@ -464,23 +464,27 @@ ul.lang-list li a:hover {
 .form-input {
     width: 300px;
     font-size: 16px;
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Серая граница */
+    border-radius: 5px; /* Скругленные углы */
+    transition: border 0.3s; /* Плавный переход границы */
+}
+.form-input:focus {
+    border-color: #007BFF; /* Цвет границы при фокусе */
+    outline: none; /* Убираем обводку по умолчанию */
 }
 
 .form-label {
     display: inline-block;
     min-width: 150px;
     vertical-align: top;
+    margin-bottom: 10px; /* Отступы между метками и вводами */
 }
 
 .form-error ul {
     list-style: none;
     padding: 0;
-    color: #CC0000;
-}
-
-.form-button {
-    min-width: 200px;
-    font-size: 16px;
+    color: #CC0000; /* Цвет ошибок */
 }
 .list-pages {
 	text-align: center;
@@ -549,4 +553,80 @@ ul.lang-list li a:hover {
 
 .button-secondary:hover {
     background-color: #5a6268; /* Темнее при наведении */
+}
+.test-page {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0faff;
+        color: #333;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .test-title {
+        font-size: 2em;
+        margin-bottom: 15px;
+        color: #004080;
+    }
+
+    .test-content {
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .answers-form {
+        margin-top: 20px;
+    }
+
+    .question-item {
+        margin-bottom: 15px;
+    }
+
+    .question-label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .submit-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+.test-results {
+    max-width: 800px; /* Максимальная ширина блока результатов */
+    margin: 20px auto; /* Выравнивание по центру страницы */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #f0f8ff; /* Светлый фон */
+    border: 1px solid #b0e0e6; /* Светло-голубая граница */
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+.test-results h1 {
+    font-size: 2.5em; /* Размер заголовка */
+    color: #0056b3; /* Цвет заголовка */
+    text-align: center; /* Выравнивание заголовка по центру */
+}
+.test-results p {
+    font-size: 1.2em; /* Размер текста */
+    line-height: 1.5; /* Межстрочный интервал */
+    color: #333; /* Цвет текста */
+    text-align: center; /* Выравнивание текста по центру */
 }

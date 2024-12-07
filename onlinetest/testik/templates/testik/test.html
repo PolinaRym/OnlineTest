@@ -8,28 +8,39 @@
     {% for t in tags %}
     <li><a href="{{ t.get_absolute_url }}">{{ t.tag }}</a></li>
     {% endfor %}
-</ul>
-{% endif %}
+    {% endif %}
 {% endwith %}
 {% endblock %}
 
 {% block content %}
-<h1>{{ test.title }}</h1>
+<div class="test-page">
+    <h1 class="test-title">{{ test.title }}</h1>
 
-{% if test.photo %}
-<p><img class="img-article-left" src="{{ test.photo.url }}"></p>
-{% endif %}
-
-{{ test.content|linebreaks }}
-
-<form id="answers-form" action="{% url 'submit_answers' test.slug %}" method="post">
-    {% csrf_token %}
-    {% for question in test.questions.all %}
-    <div>
-        <label>{{ question.question_text }}</label>
-        <input type="text" name="answers[]" class="form-input" placeholder="Ваш ответ" required>
+    <!-- Секция для текста и изображения -->
+    <div class="test-description">
+        <div class="test-image">
+            {% if test.photo %}
+            <p><img class="img-article-left" src="{{ test.photo.url }}" alt="{{ test.title }}" /></p>
+            {% endif %}
+        </div>
+        <div class="test-content">
+            {{ test.content|linebreaks }}
+        </div>
     </div>
-    {% endfor %}
-    <p><button type="submit" class="button">Получить результаты теста</button></p>
-</form>
+
+    <!-- Секция для вопросов -->
+    <div class="test-questions">
+        <h2>Вопросы</h2>
+        <form id="answers-form" class="answers-form" action="{% url 'submit_answers' test.slug %}" method="post">
+            {% csrf_token %}
+            {% for question in test.questions.all %}
+            <div class="question-item">
+                <label class="question-label">{{ question.question_text }}</label>
+                <input type="text" name="answers[]" class="form-input" placeholder="Ваш ответ" required />
+            </div>
+            {% endfor %}
+            <button type="submit" class="submit-button">Отправить ответы</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
