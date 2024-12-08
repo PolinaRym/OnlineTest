@@ -628,5 +628,109 @@ ul.lang-list li a:hover {
     font-size: 1.2em; /* Размер текста */
     line-height: 1.5; /* Межстрочный интервал */
     color: #333; /* Цвет текста */
-    text-align: center; /* Выравнивание текста по центру */
+    text-align: center;
 }
+/* Основные стили для страницы создания теста */
+.addtest-page {
+    font-family: 'Poppins', Arial, sans-serif; /* Более современный шрифт */
+    margin: 0;
+    padding: 0;
+    background-color: #e6f5ff; /* Нежный светло-голубой фон */
+    color: #333; /* Цвет текста */
+}
+
+.addtest-page h1 {
+    text-align: center;
+    color: #0056b3; /* Глубокий синий цвет */
+    margin-bottom: 30px;
+    font-size: 3em; /* Увеличенный размер шрифта для заголовка */
+    font-weight: 600; /* Более жирный шрифт */
+    text-transform: uppercase; /* Заглавные буквы */
+    letter-spacing: 1px; /* Межбуквенный интервал */
+}
+.addtest-page {
+        font-family: 'Poppins', sans-serif; /* Современный шрифт */
+        margin: 0;
+        padding: 0;
+        background-color: #e6f5ff; /* Нежно-голубой фон */
+        color: #34495e; /* Темно-серый цвет текста */
+    }
+
+    /* Заголовок */
+    .addtest-page h1 {
+        text-align: center;
+        color: #4081f7; /* Темно-синий цвет */
+        margin-bottom: 40px; /* Увеличенный отступ снизу */
+        font-size: 2.5em; /* Уменьшенный размер */
+        font-weight: 600; /* Жирный шрифт */
+        text-transform: uppercase; /* Преобразуем в верхний регистр */
+    }
+
+    /* Стили для формы на странице создания теста */
+    .addtest-page form {
+        max-width: 700px; /* Ширина формы */
+        margin: 40px auto; /* Центрирование формы */
+        padding: 30px;
+        background-color: #f0faff; /* Белый фон формы */
+        border-radius: 15px; /* Закругленные углы */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Легкая тень для формы */
+    }
+
+    /* Стили для ошибок формы */
+    .addtest-page .form-error {
+        color: #e74c3c; /* Ярко-красный цвет для ошибок */
+        margin-bottom: 15px;
+        font-size: 0.95em; /* Меньший размер шрифта */
+        font-style: italic; /* Курсивный стиль для ошибок */
+    }
+
+    /* Группа полей ввода */
+    .form-group {
+        margin-bottom: 20px; /* Отступ между полями */
+    }
+
+    /* Стили для полей ввода на странице создания теста */
+    .addtest-page .form-input {
+        width: calc(100% - 25px); /* Учитываем отступы */
+        padding: 12px;
+        border: 2px solid #bdc3c7; /* Серый цвет границы */
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 1em; /* Размер шрифта для полей ввода */
+        transition: border-color 0.3s, box-shadow 0.3s; /* Плавный переход цвета границы и тени */
+    }
+
+    .addtest-page .form-input:focus {
+        border-color: #3498db; /* Цвет границы при фокусе */
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Легкая тень при фокусе */
+        outline: none; /* Убираем стандартный контур */
+    }
+
+    /* Стили для кнопок */
+    .addtest-page .submit-button {
+        background-color: #3498db; /* Светло-синий фон кнопки */
+        color: white; /* Белый цвет текста */
+        border: none; /* Убираем стандартную границу */
+        padding: 12px 20px; /* Внутренние отступы */
+        border-radius: 8px; /* Закругленные углы */
+        cursor: pointer; /* Курсор в виде указателя */
+        font-size: 1em; /* Размер шрифта кнопки */
+        font-weight: 500; /* Полужирный текст */
+        transition: background-color 0.3s, transform 0.2s; /* Плавный переход фона и трансформации */
+    }
+
+    .addtest-page .submit-button:hover {
+        background-color: #2980b9; /* Темнее при наведении */
+        transform: translateY(-2px); /* Легкий подъем при наведении */
+    }
+
+    /* Дополнительный стиль для кнопки при нажатии */
+    .addtest-page .submit-button:active {
+        transform: translateY(1px); /* Легкий "провал" при нажатии */
+    }
+
+    /* Обертка для кнопки отправки */
+    .form-submit {
+        margin-top: 20px; /* Отступ сверху */
+        text-align: center; /* Центрирование кнопки */
+    }
